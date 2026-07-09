@@ -68,8 +68,10 @@ python -m pip install -r requirements.txt
 
 # Install additional dependencies for FARGO
 Write-Host "`n=== Installing FARGO Dependencies ===" -ForegroundColor Cyan
+Write-Host "  Installing: PyTorch with CUDA support" -ForegroundColor Gray
+python -m pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+
 $fargoDeps = @(
-    "torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121",
     "transformers",
     "accelerate",
     "safetensors",
@@ -109,12 +111,11 @@ foreach ($dir in $dirs) {
 # Install custom nodes
 Write-Host "`n=== Installing Custom Nodes ===" -ForegroundColor Cyan
 $customNodes = @(
-    "https://github.com/ltdrdata/ComfyUI-Manager.git",
-    "https://github.com/comfyanonymous/ComfyUI_custom_nodes.git"
+    "https://github.com/ltdrdata/ComfyUI-Manager.git"
 )
 
 foreach ($node in $customNodes) {
-    $nodeName = Split-Path $node -LeafBase
+    $nodeName = [System.IO.Path]::GetFileNameWithoutExtension($node)
     $nodePath = "$customNodesDir\$nodeName"
     
     if (-not (Test-Path $nodePath)) {
@@ -223,6 +224,15 @@ foreach ($file in $criticalFiles) {
     } else {
         Write-Host "  [FAIL] $file MISSING" -ForegroundColor Red
     }
+}
+
+# Check custom nodes
+Write-Host "`n=== Custom Nodes ===" -ForegroundColor Cyan
+$customNodeDir = Join-Path $installDir "custom_nodes"
+if (Test-Path $customNodeDir) {
+    $nodes = Get-ChildItem $customNodeDir -Directory
+    Write-Host "  Installed custom nodes: $($nodes.Count)"
+    $nodes | ForEach-Object { Write-Host "    - $($_.Name)" }
 }
 
 Write-Host @"
