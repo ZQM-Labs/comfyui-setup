@@ -5,7 +5,8 @@
 
 param(
     [switch]$Force,
-    [switch]$SkipModels
+    [switch]$SkipModels,
+    [switch]$CPU
 )
 
 $ErrorActionPreference = "Stop"
@@ -68,8 +69,13 @@ python -m pip install -r requirements.txt
 
 # Install additional dependencies for FARGO
 Write-Host "`n=== Installing FARGO Dependencies ===" -ForegroundColor Cyan
-Write-Host "  Installing: PyTorch with CUDA support" -ForegroundColor Gray
-python -m pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+if ($CPU) {
+    Write-Host "  Installing: PyTorch CPU-only" -ForegroundColor Gray
+    python -m pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+} else {
+    Write-Host "  Installing: PyTorch with CUDA support" -ForegroundColor Gray
+    python -m pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+}
 
 $fargoDeps = @(
     "transformers",
@@ -180,13 +186,23 @@ Write-Host "  [OK] Desktop shortcut created" -ForegroundColor Green
 
 # Create startup script
 Write-Host "`n=== Creating Startup Script ===" -ForegroundColor Cyan
-$startScript = @"
+if ($CPU) {
+    $startScript = @"
+@echo off
+cd /d "$installDir"
+echo Starting FARGO ComfyUI (CPU mode)...
+python main.py --cpu
+pause
+"@
+} else {
+    $startScript = @"
 @echo off
 cd /d "$installDir"
 echo Starting FARGO ComfyUI...
-python main.py --auto-launch
+python main.py
 pause
 "@
+}
 
 Set-Content -Path "$installDir\start-fargo.bat" -Value $startScript -Force
 Write-Host "  [OK] start-fargo.bat" -ForegroundColor Green
