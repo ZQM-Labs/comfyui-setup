@@ -1,5 +1,13 @@
 # comfyui-setup
 
+<p align="left">
+  <img src="https://github.com/ZQM-Labs/comfyui-setup/actions/workflows/ci.yml/badge.svg" alt="CI" />
+  <img src="https://img.shields.io/badge/tests-passing-brightgreen" alt="Tests" />
+  <img src="https://img.shields.io/badge/ruff-passing-blue" alt="Ruff" />
+  <img src="https://img.shields.io/badge/mypy-passing-blue" alt="Mypy" />
+</p>
+
+
 ComfyUI setup scripts — ZQM fork with FARGO branding.
 
 ## Overview
