@@ -19,4 +19,11 @@ This repository contains setup and bootstrap scripts for deploying ComfyUI with 
 
 ## License
 
+
+## Related Repositories
+
+- [ZQM-AI-Council](https://github.com/ZQM-Labs/ZQM-AI-Council) — Multi-model AI council runtime
+- [Ollama Bridge](https://github.com/ZQM-Labs/ollama-bridge) — Ollama integration layer
+- [ZQM-Labs](https://github.com/ZQM-Labs/ZQM-Labs) — Cross-org mesh utilities
+
 See repository for details.
