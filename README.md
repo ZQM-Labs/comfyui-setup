@@ -1,5 +1,8 @@
 # comfyui-setup
 
+[![CI](https://github.com/ZQM-Labs/comfyui-setup/actions/workflows/ci.yml/badge.svg)](https://github.com/ZQM-Labs/comfyui-setup/actions/workflows/ci.yml) [![Tests](https://github.com/ZQM-Labs/comfyui-setup/actions/workflows/tests.yml/badge.svg)](https://github.com/ZQM-Labs/comfyui-setup/actions/workflows/tests.yml) [![Ruff](https://github.com/ZQM-Labs/comfyui-setup/actions/workflows/ci.yml/badge.svg)](https://github.com/ZQM-Labs/comfyui-setup/actions/workflows/ci.yml) [![mypy](https://github.com/ZQM-Labs/comfyui-setup/actions/workflows/ci.yml/badge.svg)](https://github.com/ZQM-Labs/comfyui-setup/actions/workflows/ci.yml)
+
+
 ComfyUI setup scripts — ZQM fork with FARGO branding.
 
 ## Overview
